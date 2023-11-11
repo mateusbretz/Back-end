@@ -1,4 +1,4 @@
-const mogoose = require("mogoose");
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
@@ -10,7 +10,7 @@ const SessoesSchema = new Schema(
     },
   },
   {
-    timeStamps: true,
+    timestamps: true,
   }
 );
 
