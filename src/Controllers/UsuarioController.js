@@ -21,10 +21,12 @@ class UsuarioController {
   async update(req, res) {
     try {
       const { id } = req.params;
+      const usuarioEncontado = await UsuarioModel.findById(id);
 
-      const usuario = await UsuarioModel.findByIdAndUpdate(id, req.body, {
-        new: true,
-      });
+      if (!usuarioEncontado)
+        return res.status(404).json({ message: "Usuário não encontrado" });
+
+      const usuario = await usuarioEncontado.set(req.body).save();
 
       return res.status(200).json(usuario);
     } catch (error) {
@@ -34,7 +36,13 @@ class UsuarioController {
   async delete(req, res) {
     try {
       const { id } = req.params;
-      await UsuarioModel.findByIdAndDelete(id);
+
+      const usuarioEncontado = await UsuarioModel.findById(id);
+      if (!usuarioEncontado)
+        return res.status(404).json({ message: "Usuário não encontrado" });
+
+      await usuarioEncontado.deleteOne();
+
       return res
         .status(200)
         .json({ mensagem: "Usuario deletado com sucesso!" });
