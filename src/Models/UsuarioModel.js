@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const Schema = mongoose.Schema;
 
@@ -7,12 +8,30 @@ const UsuarioSchema = new Schema({
     type: String,
     unique: true,
   },
-  senha: String,
+  senha: {
+    type: String,
+    select: false,
+  },
   nome: {
     type: String,
     unique: true,
   },
   cargo: String,
+});
+
+UsuarioSchema.pre("save", async function (next) {
+  const user = this;
+
+  if (user.isModified("senha")) {
+    const salt = await bcrypt.genSalt();
+    const hash = await bcrypt.hash(user.senha, salt);
+
+    user.senha = hash;
+
+    console.log({ salt, hash });
+  }
+
+  next();
 });
 
 const UsuarioModel = mongoose.model("usuarios", UsuarioSchema);
