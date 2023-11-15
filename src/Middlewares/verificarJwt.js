@@ -1,4 +1,4 @@
-const jws = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 function verificarJwt(req, res, next) {
   const autHeader = req.headers.authorization || req.headers.Authorization;
