@@ -5,7 +5,7 @@ function verificarJwt(req, res, next) {
   if (!autHeader)
     return res
       .status(403)
-      .json({ message: "Header de autorização não encotrado" });
+      .json({ message: "Header de autorização não encontrado" });
 
   const [bearer, token] = autHeader.split(" ");
 
