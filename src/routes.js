@@ -33,7 +33,7 @@ rotas.post(
 );
 rotas.get("/sessoes", verificarJwt, SessoesControllers.read);
 rotas.delete(
-  "/sessoes/:id",
+  "/sessoes/:id_usuario",
   verificarJwt,
   SessoesValidator.destroy,
   SessoesControllers.delete
