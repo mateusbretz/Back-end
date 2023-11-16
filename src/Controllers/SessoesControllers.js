@@ -4,14 +4,11 @@ const UsuarioModel = require("../Models/UsuarioModel");
 class SessoesController {
   async create(req, res) {
     try {
-    const UsuarioEnccontrado = await UsuarioModel.findById(
-      req.body.id_usuario
-    );
-      if (!usuarioEncontrado)
-       return res.status(404).json({message: "Usuario não encontrado"});
+      const usuarioEncontado = await UsuarioModel.findById(req.body.id_usuario);
+      if (!usuarioEncontado)
+        return res.status(404).json({ message: "Usuario não encontrado" });
       const sessoes = await SessoesModel.create(req.body);
-      
-      
+
       return res.status(200).json(sessoes);
     } catch (error) {
       res.status(500).json({ message: "Deu ruim aqui!", error: error.message });

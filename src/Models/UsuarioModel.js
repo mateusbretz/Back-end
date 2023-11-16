@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const SesseoesModel = require("./SessoesModel");
+const SessoesModel = require("./SessoesModel");
 
 const Schema = mongoose.Schema;
 
