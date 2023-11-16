@@ -12,7 +12,7 @@ const rotas = Router();
 
 //USUARIOS
 rotas.post("/usuarios", UsuarioValidator.create, UsuarioController.create);
-rotas.get("/usuarios", verificarJwt, UsuarioController.read);
+rotas.get("/usuarios", UsuarioController.read);
 rotas.delete(
   "/usuarios/:id",
   verificarJwt,
